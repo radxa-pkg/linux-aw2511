@@ -1,0 +1,12 @@
+[submodule "bsp"]
+	path = bsp
+	url = https://github.com/radxa/allwinner-bsp
+	branch = cubie-aiot-v1.4.8
+[submodule "device-a733"]
+	path = device-a733
+	url = https://github.com/radxa/allwinner-device
+	branch = device-a733-v1.4.8
+[submodule "src"]
+	path = src
+	url = https://github.com/radxa/kernel
+	branch = allwinner-aiot-linux-6.6
