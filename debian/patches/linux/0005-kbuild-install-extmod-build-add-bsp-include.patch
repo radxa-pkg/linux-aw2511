@@ -1,0 +1,40 @@
+From b43fa5167f2a73d7afdbad1d97bd2576a85f90d3 Mon Sep 17 00:00:00 2001
+From: Feng Zhang <feng@radxa.com>
+Date: Thu, 14 May 2026 15:50:57 +0800
+Subject: [PATCH] kbuild: install-extmod-build: add bsp/include to kernel
+ headers
+
+Include Allwinner BSP headers when installing extmod build
+dependencies, required for compiling out-of-tree modules.
+
+Link: https://github.com/radxa/kernel/commit/74c3d3bc168fdd38d02bb4b1ac422da81feed527
+
+Signed-off-by: Feng Zhang <feng@radxa.com>
+---
+ src/scripts/package/install-extmod-build | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/scripts/package/install-extmod-build b/src/scripts/package/install-extmod-build
+index 8a7051fad087..6c53ac8f361d 100755
+--- a/src/scripts/package/install-extmod-build
++++ b/src/scripts/package/install-extmod-build
+@@ -18,7 +18,7 @@ mkdir -p "${destdir}"
+ 	cd "${srctree}"
+ 	echo Makefile
+ 	find "arch/${SRCARCH}" -maxdepth 1 -name 'Makefile*'
+-	find include scripts -type f -o -type l
++	find include scripts bsp/include -type f -o -type l
+ 	find "arch/${SRCARCH}" -name Kbuild.platforms -o -name Platform
+ 	find "arch/${SRCARCH}" -name include -o -name scripts -type d
+ ) | tar -c -f - -C "${srctree}" -T - | tar -xf - -C "${destdir}"
+@@ -28,7 +28,7 @@ mkdir -p "${destdir}"
+ 		echo tools/objtool/objtool
+ 	fi
+
+-	find "arch/${SRCARCH}/include" Module.symvers include scripts -type f
++	find "arch/${SRCARCH}/include" Module.symvers include scripts bsp/include -type f
+
+ 	if is_enabled CONFIG_GCC_PLUGINS; then
+ 		find scripts/gcc-plugins -name '*.so'
+--
+2.43.0
