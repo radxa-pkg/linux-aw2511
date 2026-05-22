@@ -23,7 +23,8 @@ Architecture: all
 Section: kernel
 Priority: optional
 Provides: linux-image
-Depends: linux-image-${binary:Version}-aw2511,
+Depends: radxa-overlays-dkms,
+         linux-image-${binary:Version}-aw2511,
          ${misc:Depends},
 Description: Radxa Linux meta-package for Radxa A733 products
  This is the meta-package for Linux kernel.
