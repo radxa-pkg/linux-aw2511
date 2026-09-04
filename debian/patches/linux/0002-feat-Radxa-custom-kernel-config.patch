@@ -5,16 +5,16 @@ Subject: [PATCH] feat: Radxa custom kernel config
 
 Signed-off-by: ZHANG Yuntian <yt@radxa.com>
 ---
- src/arch/arm64/configs/radxa_custom.config | 20 +++++++++++
- 1 file changed, 20 insertions(+)
+ src/arch/arm64/configs/radxa_custom.config | 22 ++++++++++++
+ 1 file changed, 22 insertions(+)
  create mode 100644 src/arch/arm64/configs/radxa_custom.config
 
 diff --git a/src/arch/arm64/configs/radxa_custom.config b/src/arch/arm64/configs/radxa_custom.config
 new file mode 100644
-index 000000000000..a57db04b13a4
+index 000000000000..b06c4df2df12
 --- /dev/null
 +++ b/src/arch/arm64/configs/radxa_custom.config
-@@ -0,0 +1,20 @@
+@@ -0,0 +1,22 @@
 +# Allwinner bsp supplies CONFIG_AW_CPUFREQ_DT
 +# Regular CONFIG_CPUFREQ_DT will break boot
 +CONFIG_CPUFREQ_DT=n
@@ -30,11 +30,12 @@ index 000000000000..a57db04b13a4
 +CONFIG_VIDEO_IMX214=n
 +CONFIG_VIDEO_IMX219=n
 +
-+# We use mainline u-boot/atf that does not support the following features
-+CONFIG_CPU_IDLE_MULTIPLE_DRIVERS=n
-+CONFIG_CPU_IDLE=n
++# CPU idle is validated with the A733 PSCI firmware
++CONFIG_CPU_IDLE_MULTIPLE_DRIVERS=y
++CONFIG_CPU_IDLE=y
++
++# Keep unsupported secure-world features disabled
 +CONFIG_TEE=n
 +CONFIG_OPTEE=n
 -- 
 2.47.1
-
